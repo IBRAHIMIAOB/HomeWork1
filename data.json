@@ -3,112 +3,34 @@
         "Task-1": {
             "location": "A",
             "requirement": [
-                "CS",
                 "SWE",
+                "CS",
                 "IS"
-            ],
-            "priority": 1
-        },
-        "Task-2": {
-            "location": "A",
-            "requirement": [
-                "HR",
-                "PM"
             ],
             "priority": 2
         },
-        "Task-3": {
-            "location": "A",
-            "requirement": [
-                "CS",
-                "SWE",
-                "IS"
-            ],
-            "priority": 1
-        },
-        "Task-4": {
+        "Task-3 ": {
             "location": "B",
             "requirement": [
-                "HR",
+                "MIS",
                 "PM"
             ],
-            "priority": 2
-        },
-        "Task-5": {
-            "location": "B",
-            "requirement": [
-                "CS",
-                "SWE",
-                "IS"
-            ],
-            "priority": 1
-        },
-        "Task-6": {
-            "location": "B",
-            "requirement": [
-                "HR",
-                "PM"
-            ],
-            "priority": 2
-        },
-        "Task-7": {
-            "location": "B",
-            "requirement": [
-                "CS",
-                "SWE",
-                "IS"
-            ],
-            "priority": 1
-        },
-        "Task-8": {
-            "location": "B",
-            "requirement": [
-                "HR",
-                "PM"
-            ],
-            "priority": 3
+            "priority": 7
         }
     },
     "Employee": {
-        "employee-2": {
-            "major": "SWE",
-            "location": "B",
-            "domain": [
-                "Task-5",
-                "Task-7"
-            ]
-        },
-        "employee-1": {
+        "Employee-1": {
             "major": "CS",
             "location": "A",
             "domain": [
-                "Task-1",
-                "Task-3"
+                "Task-1"
             ]
         },
-        "employee-3": {
-            "major": "IS",
-            "location": "A",
-            "domain": [
-                "Task-1",
-                "Task-3"
-            ]
-        },
-        "employee-4": {
+        "Employee-2": {
             "major": "PM",
             "location": "B",
             "domain": [
-                "Task-4",
-                "Task-6"
-            ]
-        },
-        "employee-5": {
-            "major": "PM",
-            "location": "B",
-            "domain": [
-                "Task-4",
-                "Task-6",
-                "Task-8"
+                "Task-3 "
             ]
         }
     }

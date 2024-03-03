@@ -5,8 +5,7 @@ with open("data.json" , "r") as f:
 TaskName = str(input("Enter Task Name : "))
 TaskLocation = str(input("Enter Task Location : "))
 TaskRequirement = input("Enter Requirements (Split with ',') : ").split(",")
-for i in TaskRequirement:
-    i.replace(" " , "")
+TaskRequirement = [i.replace(" " , "") for i in TaskRequirement]
 try:
     TaskPriority = int(input("Enter Task Priority : "))
 except Exception:

@@ -18,12 +18,7 @@ File["Employee"][EmployeeName] = {
         "location":EmployeeLocation,
         "domain": tempTask
     }
-# for employee in File["Employee"].keys():
-#     tempList = []
-#     for otherEmployee in File["Employee"].keys():
-#         if File["Employee"][employee].get("location") == File["Employee"][employee].get("location"):
-#             tempList.append(otherEmployee)
-#     File["Employee"][employee]["constrains"] = tempList
+
 
 with open("data.json" , "w") as f :
     f.write(json.dumps(File , indent=4))
