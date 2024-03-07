@@ -1,12 +1,16 @@
-# Gathering data and Constrains 
 import json 
-with open("data.json" , 'r') as f:
+#json library for load and dump 
+with open("data.json" , 'r') as f:          
     File :dir = json.loads(f.read())
-Tasks :list= [(task , File["Tasks"][task]["priority"]) for task  in File["Tasks"].keys()]
+#Reading data from data.json
+Tasks :list= [(task , File["Tasks"][task]["priority"]) for task  in File["Tasks"].keys()] 
+#setting Task List from File : list(str)
+
+
 Employee : dict[str , any] = {}
 for Employee1 in File["Employee"].keys():
     Employee[Employee1] = [(task , File["Tasks"][task]["priority"]) for task in File["Employee"][Employee1]["domain"] ]
-
+#setting Employee List :  dict[str , list(str)]
 constrains : dict[str , list[str]] = {}
 for Employee1 in File["Employee"].keys():
     tempList = []
@@ -15,6 +19,7 @@ for Employee1 in File["Employee"].keys():
             tempList.append(other)
     tempList.remove(Employee1)
     constrains[Employee1] = tempList
+#setting constrains  dict[str , list[str]]
 
 # Functions of BackTracing
 def backtracking(tasks, employees, constraints):
