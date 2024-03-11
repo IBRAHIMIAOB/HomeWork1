@@ -31,7 +31,90 @@
                 "MIS"
             ],
             "priority": 3
+        },
+        "Task-5": {
+            "location": "BB",
+            "requirement": [
+                "PM",
+                "MIS"
+            ],
+            "priority": 21
+        },
+        "Task-6": {
+            "location": "BB",
+            "requirement": [
+                "PM",
+                "MIS"
+            ],
+            "priority": 5
+        },
+        "Task-7": {
+            "location": "BB",
+            "requirement": [
+                "PM",
+                "MIS"
+            ],
+            "priority": 9
+        },
+        "Task-8": {
+            "location": "BB",
+            "requirement": [
+                "SWE",
+                "CS"
+            ],
+            "priority": 1
         }
     },
-    "Employee": {}
+    "Employee": {
+        "Employee-1": {
+            "major": "CS",
+            "location": "AA",
+            "domain": [
+                "Task-1",
+                "Task-2",
+                "Task-3"
+            ]
+        },
+        "Employee-2": {
+            "major": "SWE",
+            "location": "AA",
+            "domain": [
+                "Task-1",
+                "Task-2",
+                "Task-3"
+            ]
+        },
+        "Employee-3": {
+            "major": "PM",
+            "location": "AA",
+            "domain": [
+                "Task-4"
+            ]
+        },
+        "Employee-4": {
+            "major": "PM",
+            "location": "BB",
+            "domain": [
+                "Task-5",
+                "Task-6",
+                "Task-7"
+            ]
+        },
+        "Employee-5": {
+            "major": "MIS",
+            "location": "BB",
+            "domain": [
+                "Task-5",
+                "Task-6",
+                "Task-7"
+            ]
+        },
+        "Employee-6": {
+            "major": "CS",
+            "location": "BB",
+            "domain": [
+                "Task-8"
+            ]
+        }
+    }
 }

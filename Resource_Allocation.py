@@ -22,49 +22,55 @@ for Employee1 in File["Employee"].keys():
 #setting constrains  dict[str , list[str]]
 
 # Functions of BackTracing
-def backtracking(tasks, employees, constraints):
-    def is_complete(assignment):
-        return len(assignment) == len(tasks)
 
-    def select_unassigned_task(assignment):
-        unassigned_tasks = [task[0] for task in tasks if task[0] not in assignment]
-        unassigned_tasks.sort(key=lambda x: x[1])  # Sort tasks by priority
-        if unassigned_tasks:
-            return unassigned_tasks[0]
-        return None
 
-    def is_consistent(task, employee, assignment):
-        # Check if the employee is not already assigned to two tasks
-        if list(assignment.values()).count(employee) >= 2:
-            return False
-        # Check if the employee is not assigned the same task as any employee in the constraints
-        for constrained_employee, constrained_employees in constraints.items():
-            if employee == constrained_employee and task in [t[0] for t in employees[constrained_employee]]:
-                return False
-            if employee in constrained_employees and task in assignment:
-                return False
-        return True
+def reduce(employee , task , employeeList , taskList , constrains ,assignment):
+    if task not in employeeList[employee]:
+        print(f"{task} is not in {employeeList[employee]}")
+        return
+    
+    #constrains reduction
+    for otherEmployee in constrains[employee]:
+        removedTask = []
+        TaskList =assignment.get(otherEmployee)
+        if TaskList:
+            for Task in employeeList.get(employee):
+                if Task in TaskList:
+                    removedTask.append(Task)
+            for Task in removedTask:
+                employeeList[employee].remove(Task)
+                
+                
+    
+    
+    
+    if task in employeeList.get(employee):
+        if assignment.get(employee):
+            assignment.get(employee).append(task)
+        else:
+            assignment[employee] = [task]
+        employeeList.get(employee).remove(task)
+        taskList.remove(task)
+    else :
+        return
 
-    def backtrack(assignment):
-        if is_complete(assignment):
-            return assignment
-        task = select_unassigned_task(assignment)
-        if task is None:
-            return None  # No unassigned tasks left
-        for employee, domain in employees.items():
-            if task in [t[0] for t in domain] and is_consistent(task, employee, assignment):
-                assignment[task] = employee
-                result = backtrack(assignment)
-                if result is not None:
-                    return result
-                del assignment[task]
-        return None
+def backTrack(Employee , Tasks , constrains  , assignment = {} , solutions = []):
+    if len(Tasks) == 0:
+       solutions.append(assignment)
+       return
+    
+    for employee in Employee.keys():
+        for task in Employee.get(employee):
+            newEmployee = Employee.copy()
+            newTasks = Tasks.copy()
+            newassignment = assignment.copy()
+            reduce(employee , task , newEmployee , newTasks , constrains , newassignment)
+            backTrack(newEmployee  , newTasks , constrains , newassignment)
+    
+    return solutions
+x = backTrack(Employee , Tasks , constrains)
 
-    return backtrack({})
-solution = backtracking(Tasks, Employee, constrains)
-if solution:
-    print("Solution:")
-    for task, employee in solution.items():
-        print(f"{task}: {employee}")
-else:
-    print("No solution found.")
+for i in x: 
+    print(i)
+    
+
