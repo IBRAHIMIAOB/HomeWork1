@@ -1,37 +1,37 @@
 {
     "Tasks": {
         "Task-1": {
-            "location": "A",
+            "location": "AA",
             "requirement": [
                 "SWE",
-                "CS",
-                "IS"
+                "CS"
             ],
-            "priority": 2
+            "priority": 9
         },
-        "Task-3 ": {
-            "location": "B",
+        "Task-2": {
+            "location": "AA",
             "requirement": [
-                "MIS",
-                "PM"
+                "CS",
+                "SWE"
             ],
             "priority": 7
+        },
+        "Task-3": {
+            "location": "AA",
+            "requirement": [
+                "SWE",
+                "CS"
+            ],
+            "priority": 12
+        },
+        "Task-4": {
+            "location": "AA",
+            "requirement": [
+                "PM",
+                "MIS"
+            ],
+            "priority": 3
         }
     },
-    "Employee": {
-        "Employee-1": {
-            "major": "CS",
-            "location": "A",
-            "domain": [
-                "Task-1"
-            ]
-        },
-        "Employee-2": {
-            "major": "PM",
-            "location": "B",
-            "domain": [
-                "Task-3 "
-            ]
-        }
-    }
+    "Employee": {}
 }

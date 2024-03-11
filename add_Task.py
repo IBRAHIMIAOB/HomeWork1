@@ -22,13 +22,7 @@ File["Tasks"][TaskName] = {
     "priority" : TaskPriority
 }
 # insert Employee To File
-
-EmployeeDomain = File.get("Tasks").keys()
-
-
-
-
-    
+        
 with open("data.json" , "w") as f:
     f.write(json.dumps(File , indent=4))
 #writing into data.json
