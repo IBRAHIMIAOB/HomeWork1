@@ -24,53 +24,59 @@ for Employee1 in File["Employee"].keys():
 # Functions of BackTracing
 
 
-def reduce(employee , task , employeeList , taskList , constrains ,assignment):
+def reduce(employee, task, employeeList, taskList, constraints, assignment):
     if task not in employeeList[employee]:
         print(f"{task} is not in {employeeList[employee]}")
         return
     
-    #constrains reduction
-    for otherEmployee in constrains[employee]:
-        removedTask = []
-        TaskList =assignment.get(otherEmployee)
-        if TaskList:
-            for Task in employeeList.get(employee):
-                if Task in TaskList:
-                    removedTask.append(Task)
-            for Task in removedTask:
-                employeeList[employee].remove(Task)
+    # Constraints reduction
+    for otherEmployee in constraints[employee]:
+        removedTasks = []
+        taskListOther = assignment.get(otherEmployee)
+        if taskListOther:
+            for taskOther in employeeList.get(employee):
+                if taskOther in taskListOther:
+                    removedTasks.append(taskOther)
+            for taskOther in removedTasks:
+                employeeList[employee].remove(taskOther)
                 
-                
-    
-    
-    
     if task in employeeList.get(employee):
         if assignment.get(employee):
-            assignment.get(employee).append(task)
+            assignment[employee].append(task)
         else:
             assignment[employee] = [task]
-        employeeList.get(employee).remove(task)
+        employeeList[employee].remove(task)
         taskList.remove(task)
-    else :
+    else:
         return
 
-def backTrack(Employee , Tasks , constrains  , assignment = {} , solutions = []):
-    if len(Tasks) == 0:
-       solutions.append(assignment)
-       return
+def backTrack(employees, tasks, constraints, assignment=None, solutions=None):
+    if assignment is None:
+        assignment = {}
+    if solutions is None:
+        solutions = []
+
+    if len(tasks) == 0:
+        solutions.append(assignment)
+        return
     
-    for employee in Employee.keys():
-        for task in Employee.get(employee):
-            newEmployee = Employee.copy()
-            newTasks = Tasks.copy()
-            newassignment = assignment.copy()
-            reduce(employee , task , newEmployee , newTasks , constrains , newassignment)
-            backTrack(newEmployee  , newTasks , constrains , newassignment)
+    # Count tasks assigned to each employee
+    tasksCount = {employee: len(assignment.get(employee, [])) for employee in employees}
+
+    # Sort employees based on the number of assigned tasks (ascending order)
+    sortedEmployees = sorted(employees.keys(), key=lambda x: tasksCount.get(x, 0))
+
+    for employee in sortedEmployees:
+        for task in employees.get(employee):
+            newEmployees = employees.copy()
+            newTasks = tasks.copy()
+            newAssignment = assignment.copy()
+            reduce(employee, task, newEmployees, newTasks, constraints, newAssignment)
+            backTrack(newEmployees, newTasks, constraints, newAssignment, solutions)
     
     return solutions
-x = backTrack(Employee , Tasks , constrains)
 
-for i in x: 
-    print(i)
-    
+solutions = backTrack(Employee , Tasks , constrains)
+for i, solution in enumerate(solutions, start=1):
+    print(f"Solution {i}: {solution}")
 
