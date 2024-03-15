@@ -1,4 +1,4 @@
-import json 
+import json , copy
 #json library for load and dump 
 with open("data.json" , 'r') as f:          
     File :dir = json.loads(f.read())
@@ -46,37 +46,50 @@ def reduce(employee, task, employeeList, taskList, constraints, assignment):
         else:
             assignment[employee] = [task]
         employeeList[employee].remove(task)
-        taskList.remove(task)
+    
     else:
         return
 
-def backTrack(employees, tasks, constraints, assignment=None, solutions=None):
+def backTrack(employees, tasks, constraints, assignment=None, solutions=None, solution_limit=None):
     if assignment is None:
         assignment = {}
     if solutions is None:
         solutions = []
+    if solution_limit is None:
+        solution_limit = float('inf')  # No limit by default
 
-    if len(tasks) == 0:
+    Flag = True
+    for emp in employees.keys():
+        if employees.get(emp) != []:
+            Flag = False
+            break
+    if Flag:
         solutions.append(assignment)
-        return
-    
-    # Count tasks assigned to each employee
-    tasksCount = {employee: len(assignment.get(employee, [])) for employee in employees}
+        print(assignment)
+        if len(solutions) >= solution_limit:
+            return solutions
 
-    # Sort employees based on the number of assigned tasks (ascending order)
+    tasksCount = {employee: len(assignment.get(employee, [])) for employee in employees}
     sortedEmployees = sorted(employees.keys(), key=lambda x: tasksCount.get(x, 0))
 
     for employee in sortedEmployees:
         for task in employees.get(employee):
-            newEmployees = employees.copy()
+            newEmployees = copy.deepcopy(employees)
             newTasks = tasks.copy()
-            newAssignment = assignment.copy()
-            reduce(employee, task, newEmployees, newTasks, constraints, newAssignment)
-            backTrack(newEmployees, newTasks, constraints, newAssignment, solutions)
-    
-    return solutions
+            newAssignment = copy.deepcopy(assignment)
 
-solutions = backTrack(Employee , Tasks , constrains)
+            reduce(employee, task, newEmployees, newTasks, constraints, newAssignment)
+
+            solutions = backTrack(newEmployees, newTasks, constraints, newAssignment, solutions, solution_limit)
+            if len(solutions) >= solution_limit:
+                return solutions
+
+    return solutions
+limit = int(input("ENTER LIMIT: "))
+solutions = backTrack(Employee , Tasks , constrains , solution_limit=limit)
 for i, solution in enumerate(solutions, start=1):
-    print(f"Solution {i}: {solution}")
+    print("solution #", i , " :")
+    for j in solution:
+        print(j  , solution.get(j))
+    print()
 
